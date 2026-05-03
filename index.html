@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodexTRMS</title>
+    <meta name="description" content="One & Only Solution for all College Students. Access Lectures, Notes, Quizzes and an AI Doubt Solver - All in One Place! <strong>Study Smart, Achieve More with CodexTRMS!</strong>">
+    <meta name="robots" content="index, follow">
+    <meta name="google-site-verification" content="DsInfjPCx2HI832p5uJ4AjPLNSgJsT7xZ-84g-6qEI8">
+    <meta name="msvalidate.01" content="F6804D3A762519B1D0B0D14196985ECC">
+
+    <link rel="icon" type="image/png" href="https://img.icons8.com/?size=100&id=ZYujt38OjL95&format=png&color=000000">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="particles-js"></div>
+
+    <div class="app-container">
+
+        <!-- ═══ HEADER ═══ -->
+        <header>
+            <div class="header-top">
+                <div class="logo-container" onclick="updateURL('/')">
+                    <img src="https://img.icons8.com/?size=100&id=ZYujt38OjL95&format=png&color=000000" alt="Gateway Logo">
+                    <h1 id="brand-title">CodexTRMS</h1>
+                </div>
+                <button id="theme-toggle" class="theme-btn">
+                    <i class="ri-moon-line"></i>
+                    <span class="desktop-only">Dark Mode</span>
+                </button>
+            </div>
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="ri-search-line"></i>
+                    <input type="text" id="global-search" placeholder="Let's Search to learn....">
+                </div>
+            </div>
+        </header>
+
+        <!-- ═══ BREADCRUMB NAV ═══ -->
+        <div id="nav-controls" class="hidden">
+            <button id="back-btn"><i class="ri-arrow-left-line"></i> Back</button>
+            <span id="current-path">Home</span>
+        </div>
+
+        <!-- ═══ MAIN CONTENT ═══ -->
+        <main id="main-content">
+            <div class="loader">
+                <i class="ri-loader-4-line" style="font-size:2rem; animation: spin 1s linear infinite;"></i>
+                Loading...
+            </div>
+        </main>
+
+        <!-- ═══ FOOTER ═══ -->
+        <footer>
+    <p style="color: var(--text-2); font-size: 0.9rem;">
+    Developed with ❤️ by 
+    <span style="color: white; font-weight:600;">Ayush Mishra</span> & 
+    <span style="color: white; font-weight:600;">Bittu Gupta</span>
+  </p>
+        </footer>
+
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         VIDEO PLAYER MODAL
+    ═══════════════════════════════════════════════ -->
+    <div id="video-player-modal" class="hidden">
+
+        <div class="vp-header">
+            <button id="close-player"><i class="ri-arrow-left-line"></i> Back</button>
+            <h3 id="vp-title">Now Playing</h3>
+            <button id="vp-menu-btn" class="notes-btn">
+                <i class="ri-file-list-3-line"></i>
+                <span class="desktop-only">Attachments</span>
+            </button>
+        </div>
+
+        <div class="vp-body">
+
+            <!-- Video + Info scroll area -->
+            <div class="vp-main-content">
+                <div class="vp-video-container">
+                    <div class="video-wrapper" id="video-wrapper">
+                        <video id="player" playsinline controls></video>
+                    </div>
+                    <div class="vp-info">
+                        <h2 id="vp-lecture-name">Lecture Title</h2>
+                        <div class="vp-quote" id="vp-quote"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sliding Attachments Sidebar -->
+            <div id="vp-sidebar">
+                <div class="sidebar-header">
+                    <h4>Attachments</h4>
+                    <button id="close-sidebar">
+                        <i class="ri-close-line"></i>
+                    </button>
+                </div>
+                <div id="vp-attachments-list" class="sidebar-list"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         QUIZ MODAL
+    ═══════════════════════════════════════════════ -->
+    <div id="quiz-modal" class="hidden">
+        <div style="max-width:800px; margin:0 auto; color:var(--text-1); padding:20px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; padding-bottom:10px; border-bottom:1px solid var(--border);">
+                <h2 id="quiz-title" style="font-family:var(--font-display);">Quiz</h2>
+                <div id="quiz-header-actions" style="display:flex; align-items:center; gap:12px;">
+                    <span id="quiz-timer" style="color:var(--red); font-weight:700; font-size:1.1rem;">00:00</span>
+                    <button onclick="closeQuiz()" class="btn-small">Exit</button>
+                </div>
+            </div>
+            <div id="quiz-dashboard" class="hidden" style="text-align:center; padding:20px;"></div>
+            <div id="quiz-questions-wrapper">
+                <div id="quiz-questions-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+         AI DOUBT SOLVER FAB + CHAT
+    ═══════════════════════════════════════════════ -->
+    <button id="doubt-btn" class="fab-doubt">
+        <i class="ri-robot-2-line"></i>
+        <span class="desktop-only">Ask Doubt</span>
+    </button>
+
+    <div id="doubt-modal" class="hidden">
+        <!-- Chat Header -->
+        <div style="padding:14px 16px; background:var(--bg-2); border-bottom:1px solid var(--border); border-radius:var(--radius-xl) var(--radius-xl) 0 0; display:flex; justify-content:space-between; align-items:center;">
+            <div style="display:flex; align-items:center; gap:8px;">
+                <div style="width:8px; height:8px; border-radius:50%; background:var(--green); animation: pulse 2s infinite;"></div>
+                <span style="font-family:var(--font-display); font-weight:700; font-size:0.9rem; color:var(--text-1);">AI Tutor</span>
+            </div>
+            <span id="close-doubt" style="cursor:pointer; color:var(--text-2); font-size:1.3rem; line-height:1; padding:4px;">&times;</span>
+        </div>
+
+        <!-- Chat Messages -->
+        <div id="chat-history">
+            <div style="text-align:center; color:var(--text-3); margin-top:20px; font-size:0.85rem; line-height:1.6;">
+                Ask me anything <br>What you can😏
+            </div>
+        </div>
+
+        <!-- Chat Input -->
+        <div style="padding:12px; background:var(--bg-2); border-top:1px solid var(--border); border-radius:0 0 var(--radius-xl) var(--radius-xl); display:flex; gap:8px; align-items:center;">
+            <input type="text" id="doubt-input" placeholder="Type your doubt..."
+                style="flex:1; padding:9px 14px; border-radius:var(--radius-pill); border:1px solid var(--border); background:var(--bg-elevated); color:var(--text-1); font-family:var(--font-body); font-size:0.85rem; outline:none; transition:border-color var(--t-fast);">
+            <button id="send-doubt"
+                style="width:36px; height:36px; border-radius:50%; background:var(--accent); color:white; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0; transition:all var(--t-fast);">
+                <i class="ri-send-plane-fill" style="font-size:0.9rem;"></i>
+            </button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
+
+<script src="Otherbatch.js"></script>
+<script src="aktu3rd.js"></script>
+<script src="Dsaapna.js"></script>
+<script src="Dsa.js"></script>
+<script src="chaicode.js"></script>
+<script src="love.js"></script>
+<script src="wedding.js"></script>
+<script src="poh.js"></script>
+<script src="pwskill.js"></script>
+<script src="hhld.js"></script>
+<script src="Modeling.js"></script>
+<script src="udemy.js"></script>
+<script src="trading.js"></script>
+<script src="DevOps.js"></script>
+<script src="harkirat.js"></script>
+<script src="Shreyansh.js"></script>
+<script src="Campus.js"></script>
+<script src="codewithharry.js"></script>
+<script src="adca.js"></script>
+<script src="ineuron.js"></script>
+<script src="b4u.js"></script>
+<script src="earners.js"></script>
+<script src="drop.js"></script>
+<script src="jasonfedin.js"></script>
+
+<!-- 🔥 IMPORTANT: script.js LAST me -->
+<script src="script.js"></script>
+
+    <!-- FIREBASE NOTIFICATION - YAHAN ADD KARO -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+      import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-messaging.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyBtq2BnjGLVOCMgB23FO7lKkZfAvq2UmZE",
+        authDomain: "codextrms-680e9.firebaseapp.com",
+        projectId: "codextrms-680e9",
+        messagingSenderId: "908044590802",
+        appId: "1:908044590802:web:f1481c25270fd38931d70b"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const messaging = getMessaging(app);
+
+      try {
+        const permission = await Notification.requestPermission();
+        if (permission === "granted") {
+          const token = await getToken(messaging, {
+            vapidKey: "BAhhd4FTP48k4Irg8Zxa7SX-saxGoUIZAIH9YSGB6JBixpV2wvpS4FCI-QcnKi7T2jdxaRkBcIOpS3J96934TDU"
+          });
+          console.log("FCM Token:", token);
+        }
+      } catch(err) {
+        console.log("Error:", err);
+      }
+    </script>
+    
+    <style>
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        /* Quiz modal needs fixed + scroll */
+        #quiz-modal {
+            position: fixed;
+            inset: 0;
+            background: var(--bg);
+            z-index: 2000;
+            overflow-y: auto;
+            padding: 20px;
+        }
+    </style>
+
+</body>
+</html>
