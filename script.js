@@ -84,6 +84,7 @@ async function loadDynamicClass(websiteName = "Rensiter") {
         return [];
     }
 }
+window.onload = async function() {
     DB = {
         '11':  { name: 'APNA COLLEGE',      batches: safeLoad('dataClass11','class11Data','batch11') },
         '12':  { name: 'Class 12th',         batches: safeLoad('dataClass12','class12Data','batch12') },
